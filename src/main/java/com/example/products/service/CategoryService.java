@@ -15,33 +15,36 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    private static final Logger logger = LoggerFactory.getLogger( CategoryService.class );
-
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
     private CategoryRepository repository;
 
-    @Transactional
-    public void save ( Category category ) {
-        logger.info( "START | Save Category {}", category.getId( ) );
-        repository.save( category );
-        logger.info( "FINISH | Save Product {}", category.getId( ) );
-    }
-
-    @Transactional( readOnly = true )
-    public Optional<Category> findById ( String id ) {
-        return repository.findCategoryById( id );
-
+    @Autowired
+    CategoryService(CategoryRepository categoryRepository) {
+        this.repository = categoryRepository;
     }
 
     @Transactional
-    public void delete ( String id ) {
-        logger.info( "START | Delete Category {}", id );
-        repository.deleteById( id );
-        logger.info( "FINISH | Delete Product {}", id );
+    public void save(Category category) {
+        logger.info("START | Save Category {}", category.getId());
+        repository.save(category);
+        logger.info("FINISH | Save Product {}", category.getId());
     }
 
-    @Transactional( readOnly = true )
-    public Optional<List<Product>> getProductsByCategory ( String categoryId ) {
-        return repository.findProductsByCategory( categoryId );
+    @Transactional(readOnly = true)
+    public Optional<Category> findById(String id) {
+        return repository.findCategoryById(id);
+
+    }
+
+    @Transactional
+    public void delete(String id) {
+        logger.info("START | Delete Category {}", id);
+        repository.deleteById(id);
+        logger.info("FINISH | Delete Product {}", id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<List<Product>> getProductsByCategory(String categoryId) {
+        return repository.findProductsByCategory(categoryId);
     }
 }

@@ -1,9 +1,6 @@
 package com.example.products.entity;
 
 import com.example.common.entitty.EnumUtil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
@@ -24,9 +21,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @DynamicUpdate
 @Entity
 @Table( name = "product" )
@@ -66,6 +60,93 @@ public class Product implements Serializable {
 
     @Column( name = "discount", nullable = false )
     private BigDecimal discount;
+
+    public Product(String id, String description, BigDecimal price, BigInteger totalStock, BigInteger minStock, String barcode, EnumUtil.Status status, Category category, BigDecimal discount) {
+        this.id = id;
+        this.description = description;
+        this.price = price;
+        this.totalStock = totalStock;
+        this.minStock = minStock;
+        this.barcode = barcode;
+        this.status = status;
+        this.category = category;
+        this.discount = discount;
+    }
+
+    public Product() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigInteger getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(BigInteger totalStock) {
+        this.totalStock = totalStock;
+    }
+
+    public BigInteger getMinStock() {
+        return minStock;
+    }
+
+    public void setMinStock(BigInteger minStock) {
+        this.minStock = minStock;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public EnumUtil.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumUtil.Status status) {
+        this.status = status;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
 
     private EnumUtil.Status defaultStatus ( ) {
         return EnumUtil.Status.ACTIVE;

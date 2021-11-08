@@ -16,39 +16,45 @@ import java.util.Map;
 @Component
 public class ProductProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger( ProductProcessor.class );
+    private static final Logger logger = LoggerFactory.getLogger(ProductProcessor.class);
+
+    private ProductService productService;
+    private ConverterUtil converterUtil;
 
     @Autowired
-    private ProductService productService;
-
-    public void store ( Map<String, Object> payload ) {
-        logger.info( "START | Create Product {}", payload );
-        Product product = ConverterUtil.mapToObject( payload, Product.class );
-        productService.save( product );
-        logger.info( "FINISH | Create Product {}", payload );
+    public ProductProcessor(ProductService productService, ConverterUtil converterUtil) {
+        this.productService = productService;
+        this.converterUtil = converterUtil;
     }
 
-    public void refresh ( Map<String, Object> payload ) {
-        logger.info( "START | Update Product {}", payload );
-        Product product = ConverterUtil.mapToObject( payload, Product.class );
-        Product productFromDb = productService.findById( product.getId( ) ).get( );
-        ConverterUtil.copyProperties( product, productFromDb );
-        productService.save( productFromDb );
-        logger.info( "FINISH | Update Product {}", payload );
+    public void store(Map<String, Object> payload) {
+        logger.info("START | Create Product {}", payload);
+        Product product = converterUtil.mapToObject(payload, Product.class);
+        productService.save(product);
+        logger.info("FINISH | Create Product {}", payload);
     }
 
-    public void delete ( Map<String, Object> payload ) {
-        logger.info( "START | Delete Product {}", payload );
-        String id = ( String ) payload.get( "id" );
-        productService.delete( id );
-        logger.info( "FINISH | Delete Product {}", payload );
+    public void refresh(Map<String, Object> payload) {
+        logger.info("START | Update Product {}", payload);
+        Product product = converterUtil.mapToObject(payload, Product.class);
+        Product productFromDb = productService.findById(product.getId()).get();
+        converterUtil.copyProperties(product, productFromDb);
+        productService.save(productFromDb);
+        logger.info("FINISH | Update Product {}", payload);
     }
 
-    public void updateProductsStock ( Map<String, Object> payload ) {
-        logger.info( "START | Update Products Stock" );
-        List<HashMap<String, Object>> productsListPayload = ( List<HashMap<String, Object>> ) payload.get( "products" );
-        InvoiceStatus invoiceStatus = InvoiceStatus.valueOf( payload.get( "invoiceStatus" ).toString( ) );
-        productService.updateProductStock( productsListPayload, invoiceStatus );
-        logger.info( "FINISH | Update Products Stock" );
+    public void delete(Map<String, Object> payload) {
+        logger.info("START | Delete Product {}", payload);
+        String id = (String) payload.get("id");
+        productService.delete(id);
+        logger.info("FINISH | Delete Product {}", payload);
+    }
+
+    public void updateProductsStock(Map<String, Object> payload) {
+        logger.info("START | Update Products Stock");
+        List<HashMap<String, Object>> productsListPayload = (List<HashMap<String, Object>>) payload.get("products");
+        InvoiceStatus invoiceStatus = InvoiceStatus.valueOf(payload.get("invoiceStatus").toString());
+        productService.updateProductStock(productsListPayload, invoiceStatus);
+        logger.info("FINISH | Update Products Stock");
     }
 }

@@ -14,41 +14,43 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductConsumer {
 
-    private static final Logger logger = LoggerFactory.getLogger( ProductConsumer.class );
-
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(ProductConsumer.class);
     private ProductProcessor productProcessor;
-
-    @Autowired
     private CategoryProcessor categoryProcessor;
 
-    @KafkaListener( topics = { "${topic-name}" } )
-    public void handleProductEvent ( @Payload final MessageEvent messageEvent ) {
-        logger.info( "Message received: {}", messageEvent.getEventName( ) );
-        EventType eventType = messageEvent.getEventName( );
-        switch ( eventType ) {
+    @Autowired
+    public ProductConsumer(ProductProcessor productProcessor, CategoryProcessor categoryProcessor) {
+        this.productProcessor = productProcessor;
+        this.categoryProcessor = categoryProcessor;
+    }
+
+    @KafkaListener(topics = {"${topic-name}"})
+    public void handleProductEvent(@Payload final MessageEvent messageEvent) {
+        logger.info("Message received: {}", messageEvent.getEventName());
+        EventType eventType = messageEvent.getEventName();
+        switch (eventType) {
             case CREATE_PRODUCT: {
-                productProcessor.store( messageEvent.getPayload( ) );
+                productProcessor.store(messageEvent.getPayload());
                 break;
             }
             case UPDATE_PRODUCT: {
-                productProcessor.refresh( messageEvent.getPayload( ) );
+                productProcessor.refresh(messageEvent.getPayload());
                 break;
             }
             case DELETE_PRODUCT: {
-                productProcessor.delete( messageEvent.getPayload( ) );
+                productProcessor.delete(messageEvent.getPayload());
                 break;
             }
             case UPDATE_PRODUCT_STOCK: {
-                productProcessor.updateProductsStock( messageEvent.getPayload( ) );
+                productProcessor.updateProductsStock(messageEvent.getPayload());
                 break;
             }
             case CREATE_CATEGORY: {
-                categoryProcessor.store( messageEvent.getPayload( ) );
+                categoryProcessor.store(messageEvent.getPayload());
                 break;
             }
             case DELETE_CATEGORY: {
-                categoryProcessor.delete( messageEvent.getPayload( ) );
+                categoryProcessor.delete(messageEvent.getPayload());
                 break;
             }
         }

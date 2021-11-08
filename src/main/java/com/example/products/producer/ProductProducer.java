@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductProducer {
 
-    @Autowired
     private KafkaSenderService senderService;
 
-    public ProductProducer ( ) {
+    @Autowired
+    ProductProducer(KafkaSenderService senderService) {
+        this.senderService = senderService;
     }
 
-    public void sendMessage ( MessageEvent messageEvent ) {
+    public void sendMessage (MessageEvent messageEvent ) {
         senderService.sendMessage( messageEvent );
     }
 }

@@ -24,48 +24,55 @@ import java.util.Optional;
 @Component
 public class CategoryHandlerImpl implements CategoryHandler {
 
-    @Autowired
     private ProductProducer productProducer;
+    private CategoryService categoryService;
+    private ConverterUtil converterUtil;
+    private IdUtil idUtil;
 
     @Autowired
-    private CategoryService categoryService;
-
-    @Override
-    public ResponseEntity<Object> createCategory ( Category category ) {
-        category.setId( IdUtil.generateId( EnumUtil.UUIDType.SHORT ) );
-        Map<String, Object> categoryPayload = ConverterUtil.objectToMap( category );
-        MessageEvent messageEvent = new MessageEvent( EnumUtil.EventType.CREATE_CATEGORY, categoryPayload );
-        productProducer.sendMessage( messageEvent );
-        return new ResponseEntity<>( category.getId( ), HttpStatus.OK );
+    CategoryHandlerImpl(ProductProducer productProducer, CategoryService categoryService, ConverterUtil converterUtil, IdUtil idUtil) {
+        this.productProducer = productProducer;
+        this.categoryService = categoryService;
+        this.converterUtil = converterUtil;
+        this.idUtil = idUtil;
     }
 
     @Override
-    public ResponseEntity<Object> updateCategory ( Map<String, Object> categoryMap ) {
+    public ResponseEntity<Object> createCategory(Category category) {
+        category.setId(idUtil.generateId(EnumUtil.UUIDType.SHORT));
+        Map<String, Object> categoryPayload = converterUtil.objectToMap(category);
+        MessageEvent messageEvent = new MessageEvent(EnumUtil.EventType.CREATE_CATEGORY, categoryPayload);
+        productProducer.sendMessage(messageEvent);
+        return new ResponseEntity<>(category.getId(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Object> updateCategory(Map<String, Object> categoryMap) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Object> getCategoryById ( String id ) {
-        Optional<Category> categoryOptional = categoryService.findById( id );
-        if ( categoryOptional.isEmpty( ) ) {
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, String.format( "Unable to find Category, Category with ID %s Not Found", id ) );
+    public ResponseEntity<Object> getCategoryById(String id) {
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if (categoryOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Unable to find Category, Category with ID %s Not Found", id));
         }
-        Category category = categoryOptional.get( );
-        return new ResponseEntity<>( category, HttpStatus.FOUND );
+        Category category = categoryOptional.get();
+        return new ResponseEntity<>(category, HttpStatus.FOUND);
     }
 
     @Override
-    public ResponseEntity<Object> deleteCategory ( String id ) {
-        Map<String, Object> payload = new HashMap<>( );
-        payload.put( "id", id );
-        MessageEvent messageEvent = new MessageEvent( EnumUtil.EventType.DELETE_CATEGORY, payload );
-        productProducer.sendMessage( messageEvent );
-        return new ResponseEntity<>( payload, HttpStatus.OK );
+    public ResponseEntity<Object> deleteCategory(String id) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("id", id);
+        MessageEvent messageEvent = new MessageEvent(EnumUtil.EventType.DELETE_CATEGORY, payload);
+        productProducer.sendMessage(messageEvent);
+        return new ResponseEntity<>(payload, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Object> getProductsByCategory ( String categoryId ) {
-        Optional<List<Product>> optionalProductList = categoryService.getProductsByCategory( categoryId );
-        return new ResponseEntity<>( optionalProductList.orElse( new ArrayList<>( ) ), HttpStatus.OK );
+    public ResponseEntity<Object> getProductsByCategory(String categoryId) {
+        Optional<List<Product>> optionalProductList = categoryService.getProductsByCategory(categoryId);
+        return new ResponseEntity<>(optionalProductList.orElse(new ArrayList<>()), HttpStatus.OK);
     }
 }
