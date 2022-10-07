@@ -19,42 +19,40 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/category/v1")
+@RequestMapping( "/category/v1" )
 public class CategoryController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    private static final Logger logger = LoggerFactory.getLogger( CategoryController.class );
     private CategoryHandler categoryHandler;
 
     @Autowired
-    CategoryController(CategoryHandler categoryHandler) {
+    CategoryController( CategoryHandler categoryHandler ) {
         this.categoryHandler = categoryHandler;
     }
 
-    @PostMapping(name = "create", value = "/", path = "/", consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> create(@RequestBody Category category) {
-        logger.info("HomeController - Start sending message.");
-        return categoryHandler.createCategory(category);
+    @PostMapping( name = "create", value = "/", path = "/", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public ResponseEntity< Object > create( @RequestBody Category category ) {
+        logger.info( "HomeController - Start sending message." );
+        return categoryHandler.createCategory( category );
     }
 
-    @PatchMapping(name = "update", value = "/", path = "/", consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> patch(@RequestBody Map<String, Object> categoryMap) {
-        return categoryHandler.updateCategory(categoryMap);
+    @PatchMapping( name = "update", value = "/", path = "/", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public ResponseEntity< Object > patch( @RequestBody Map< String, Object > categoryMap ) {
+        return categoryHandler.updateCategory( categoryMap );
     }
 
-    @GetMapping(name = "get by id", path = "/{id}", value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> get(@PathVariable(name = "id") String id) {
-        return categoryHandler.getCategoryById(id);
+    @GetMapping( name = "get by id", path = "/{id}", value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public ResponseEntity< Object > get( @PathVariable( name = "id" ) String id ) {
+        return categoryHandler.getCategoryById( id );
     }
 
-    @DeleteMapping(name = "delete", value = "/{id}", path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> delete(@PathVariable(name = "id") String id) {
-        return categoryHandler.deleteCategory(id);
+    @DeleteMapping( name = "delete", value = "/{id}", path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public ResponseEntity< Object > delete( @PathVariable( name = "id" ) String id ) {
+        return categoryHandler.deleteCategory( id );
     }
 
-    @GetMapping(name = "get products by category id", path = "/{id}/products", value = "/{id}/products", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> getProductsByCategory(@PathVariable(name = "id") String id) {
-        return categoryHandler.getProductsByCategory(id);
+    @GetMapping( name = "get products by category id", path = "/{id}/products", value = "/{id}/products", produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public ResponseEntity< Object > getProductsByCategory( @PathVariable( name = "id" ) String id ) {
+        return categoryHandler.getProductsByCategory( id );
     }
 }

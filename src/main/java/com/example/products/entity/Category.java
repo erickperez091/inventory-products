@@ -1,35 +1,43 @@
 package com.example.products.entity;
 
 import com.example.common.entitty.EnumUtil;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.*;
 import java.io.Serializable;
 
 @DynamicUpdate
-@Table(name = "category")
+@Table( name = "category" )
 @Entity
-@SQLDelete(sql = "UPDATE category SET status='DELETED' where id = ?", check = ResultCheckStyle.COUNT)
-@FilterDef(name = "categoryActive")
-@Filters({
-        @Filter(name = "categoryActive", condition = "status <> 'DELETED'")
-})
+@SQLDelete( sql = "UPDATE category SET status='DELETED' where id = ?", check = ResultCheckStyle.COUNT )
+@FilterDef( name = "categoryActive" )
+@Filters( {
+        @Filter( name = "categoryActive", condition = "status <> 'DELETED'" )
+} )
 public class Category implements Serializable {
 
     @Id
-    @Column(name = "id", nullable = false, unique = true)
+    @Column( name = "id", nullable = false, unique = true )
     private String id;
 
-    @Column(name = "description", nullable = false)
+    @Column( name = "description", nullable = false )
     private String description;
 
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
+    @Column( name = "status" )
+    @Enumerated( EnumType.STRING )
     private EnumUtil.Status status = defaultStatus();
 
-    public Category(String id, String description, EnumUtil.Status status) {
+    public Category( String id, String description, EnumUtil.Status status ) {
         this.id = id;
         this.description = description;
         this.status = status;
@@ -42,7 +50,7 @@ public class Category implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId( String id ) {
         this.id = id;
     }
 
@@ -50,7 +58,7 @@ public class Category implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription( String description ) {
         this.description = description;
     }
 
@@ -58,7 +66,7 @@ public class Category implements Serializable {
         return status;
     }
 
-    public void setStatus(EnumUtil.Status status) {
+    public void setStatus( EnumUtil.Status status ) {
         this.status = status;
     }
 

@@ -13,7 +13,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 @EnableKafka
 @EnableEurekaClient
 public class ProductApp {
-    public static void main ( String[] args ) {
+    public static void main( String[] args ) {
         SpringApplication.run( ProductApp.class, args );
     }
 

@@ -7,13 +7,13 @@ import java.util.Map;
 
 public interface ProductHandler {
 
-    ResponseEntity<Object> createProduct ( Product product );
+    ResponseEntity< Object > createProduct( Product product );
 
-    ResponseEntity<Object> updateProduct ( Map<String, Object> productMap );
+    ResponseEntity< Object > updateProduct( Map< String, Object > productMap );
 
-    ResponseEntity<Object> getProductById ( String id );
+    ResponseEntity< Object > getProductById( String id );
 
-    ResponseEntity<Object> deleteProduct ( String id );
+    ResponseEntity< Object > deleteProduct( String id );
 
-    ResponseEntity<Object> updateProductsStock ( Map<String, Object> products );
+    ResponseEntity< Object > updateProductsStock( Map< String, Object > products );
 }

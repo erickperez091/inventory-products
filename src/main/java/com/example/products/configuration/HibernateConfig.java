@@ -13,10 +13,10 @@ import java.text.SimpleDateFormat;
 public class HibernateConfig {
 
     @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter ( ) {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter( );
-        ObjectMapper mapper = converter.getObjectMapper( );
-        Hibernate5Module hibernate5Module = new Hibernate5Module( );
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper mapper = converter.getObjectMapper();
+        Hibernate5Module hibernate5Module = new Hibernate5Module();
         //hibernate5Module.configure(Hibernate5Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true);
         hibernate5Module.configure( Hibernate5Module.Feature.FORCE_LAZY_LOADING, true );
         mapper.registerModule( hibernate5Module );

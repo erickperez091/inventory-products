@@ -11,11 +11,11 @@ public class ProductProducer {
     private KafkaSenderService senderService;
 
     @Autowired
-    ProductProducer(KafkaSenderService senderService) {
+    ProductProducer( KafkaSenderService senderService ) {
         this.senderService = senderService;
     }
 
-    public void sendMessage (MessageEvent messageEvent ) {
+    public void sendMessage( MessageEvent messageEvent ) {
         senderService.sendMessage( messageEvent );
     }
 }

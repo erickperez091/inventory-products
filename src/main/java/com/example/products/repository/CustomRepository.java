@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface CustomRepository {
 
-    Optional<Product> findProductById ( String id );
+    Optional< Product > findProductById( String id );
 
-    Optional<Category> findCategoryById ( String id );
+    Optional< Category > findCategoryById( String id );
 
-    Optional<List<Product>> findProductsByCategory ( String categoryId );
+    Optional< List< Product > > findProductsByCategory( String categoryId );
 
 }

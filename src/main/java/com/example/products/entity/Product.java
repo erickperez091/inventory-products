@@ -52,7 +52,7 @@ public class Product implements Serializable {
 
     @Column( name = "status" )
     @Enumerated( EnumType.STRING )
-    private EnumUtil.Status status = defaultStatus( );
+    private EnumUtil.Status status = defaultStatus();
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "category_id", nullable = false )
@@ -61,7 +61,7 @@ public class Product implements Serializable {
     @Column( name = "discount", nullable = false )
     private BigDecimal discount;
 
-    public Product(String id, String description, BigDecimal price, BigInteger totalStock, BigInteger minStock, String barcode, EnumUtil.Status status, Category category, BigDecimal discount) {
+    public Product( String id, String description, BigDecimal price, BigInteger totalStock, BigInteger minStock, String barcode, EnumUtil.Status status, Category category, BigDecimal discount ) {
         this.id = id;
         this.description = description;
         this.price = price;
@@ -80,7 +80,7 @@ public class Product implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId( String id ) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class Product implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription( String description ) {
         this.description = description;
     }
 
@@ -96,7 +96,7 @@ public class Product implements Serializable {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice( BigDecimal price ) {
         this.price = price;
     }
 
@@ -104,7 +104,7 @@ public class Product implements Serializable {
         return totalStock;
     }
 
-    public void setTotalStock(BigInteger totalStock) {
+    public void setTotalStock( BigInteger totalStock ) {
         this.totalStock = totalStock;
     }
 
@@ -112,7 +112,7 @@ public class Product implements Serializable {
         return minStock;
     }
 
-    public void setMinStock(BigInteger minStock) {
+    public void setMinStock( BigInteger minStock ) {
         this.minStock = minStock;
     }
 
@@ -120,7 +120,7 @@ public class Product implements Serializable {
         return barcode;
     }
 
-    public void setBarcode(String barcode) {
+    public void setBarcode( String barcode ) {
         this.barcode = barcode;
     }
 
@@ -128,7 +128,7 @@ public class Product implements Serializable {
         return status;
     }
 
-    public void setStatus(EnumUtil.Status status) {
+    public void setStatus( EnumUtil.Status status ) {
         this.status = status;
     }
 
@@ -136,7 +136,7 @@ public class Product implements Serializable {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory( Category category ) {
         this.category = category;
     }
 
@@ -144,11 +144,11 @@ public class Product implements Serializable {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount( BigDecimal discount ) {
         this.discount = discount;
     }
 
-    private EnumUtil.Status defaultStatus ( ) {
+    private EnumUtil.Status defaultStatus() {
         return EnumUtil.Status.ACTIVE;
     }
 
