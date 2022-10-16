@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -81,9 +82,9 @@ public class ProductHandlerImpl implements ProductHandler {
     }
 
     @Override
-    public ResponseEntity< Object > updateProductsStock( Map< String, Object > products ) {
-        MessageEvent messageEvent = new MessageEvent( EventType.UPDATE_PRODUCT_STOCK, products );
-        productProducer.sendMessage( messageEvent );
-        return new ResponseEntity<>( HttpStatus.OK );
+    public ResponseEntity< Object > updateProductsStock( List< Map< String, Object > > products ) {
+//        MessageEvent messageEvent = new MessageEvent( EventType.UPDATE_PRODUCT_STOCK, products );
+//        productProducer.sendMessage( messageEvent );
+        return new ResponseEntity<>( products, HttpStatus.OK );
     }
 }

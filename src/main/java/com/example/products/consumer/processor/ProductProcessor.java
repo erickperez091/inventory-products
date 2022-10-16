@@ -52,9 +52,9 @@ public class ProductProcessor {
 
     public void updateProductsStock( Map< String, Object > payload ) {
         logger.info( "START | Update Products Stock" );
-        List< HashMap< String, Object > > productsListPayload = (List< HashMap< String, Object > >) payload.get( "products" );
+        /*List< HashMap< String, Object > > productsListPayload = (List< HashMap< String, Object > >) payload.get( "products" );
         InvoiceStatus invoiceStatus = InvoiceStatus.valueOf( payload.get( "invoiceStatus" ).toString() );
-        productService.updateProductStock( productsListPayload, invoiceStatus );
+        productService.updateProductStock( productsListPayload, invoiceStatus );*/
         logger.info( "FINISH | Update Products Stock" );
     }
 }

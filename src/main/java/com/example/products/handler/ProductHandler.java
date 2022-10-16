@@ -3,6 +3,7 @@ package com.example.products.handler;
 import com.example.products.entity.Product;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ProductHandler {
@@ -15,5 +16,5 @@ public interface ProductHandler {
 
     ResponseEntity< Object > deleteProduct( String id );
 
-    ResponseEntity< Object > updateProductsStock( Map< String, Object > products );
+    ResponseEntity< Object > updateProductsStock( List< Map< String, Object > > products );
 }

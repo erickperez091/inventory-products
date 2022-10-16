@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -60,7 +61,7 @@ public class ProductController {
     }
 
     @PatchMapping( name = "update products stock", value = "/products-stock", path = "/products-stock", produces = { MediaType.APPLICATION_JSON_VALUE } )
-    public ResponseEntity< Object > updateProductsStock( @RequestBody Map< String, Object > products ) {
+    public ResponseEntity< Object > updateProductsStock( @RequestBody List<Map< String, Object >> products ) {
         return productHandler.updateProductsStock( products );
     }
 }
