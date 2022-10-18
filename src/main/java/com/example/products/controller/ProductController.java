@@ -1,6 +1,8 @@
 package com.example.products.controller;
 
 import com.example.products.entity.Product;
+import com.example.products.entity.dto.InvoiceDTO;
+import com.example.products.entity.dto.ProductToUpdateDTO;
 import com.example.products.handler.ProductHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ import java.util.Map;
 public class ProductController {
 
     private static final Logger logger = LoggerFactory.getLogger( ProductController.class );
-    private ProductHandler productHandler;
+    private final ProductHandler productHandler;
 
     @Autowired
     ProductController( ProductHandler productHandler ) {
@@ -61,7 +63,7 @@ public class ProductController {
     }
 
     @PatchMapping( name = "update products stock", value = "/products-stock", path = "/products-stock", produces = { MediaType.APPLICATION_JSON_VALUE } )
-    public ResponseEntity< Object > updateProductsStock( @RequestBody List<Map< String, Object >> products ) {
-        return productHandler.updateProductsStock( products );
+    public ResponseEntity< Object > updateProductsStock( @RequestBody InvoiceDTO invoiceDTO ) {
+        return productHandler.updateProductsStock( invoiceDTO );
     }
 }

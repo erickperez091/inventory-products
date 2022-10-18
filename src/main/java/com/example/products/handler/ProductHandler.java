@@ -1,6 +1,8 @@
 package com.example.products.handler;
 
 import com.example.products.entity.Product;
+import com.example.products.entity.dto.InvoiceDTO;
+import com.example.products.entity.dto.ProductToUpdateDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -16,5 +18,5 @@ public interface ProductHandler {
 
     ResponseEntity< Object > deleteProduct( String id );
 
-    ResponseEntity< Object > updateProductsStock( List< Map< String, Object > > products );
+    ResponseEntity< Object > updateProductsStock( InvoiceDTO invoiceDTO );
 }

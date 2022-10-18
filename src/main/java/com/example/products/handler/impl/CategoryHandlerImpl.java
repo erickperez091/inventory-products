@@ -24,10 +24,10 @@ import java.util.Optional;
 @Component
 public class CategoryHandlerImpl implements CategoryHandler {
 
-    private ProductProducer productProducer;
-    private CategoryService categoryService;
-    private ConverterUtil converterUtil;
-    private IdUtil idUtil;
+    private final ProductProducer productProducer;
+    private final CategoryService categoryService;
+    private final ConverterUtil converterUtil;
+    private final IdUtil idUtil;
 
     @Autowired
     CategoryHandlerImpl( ProductProducer productProducer, CategoryService categoryService, ConverterUtil converterUtil, IdUtil idUtil ) {

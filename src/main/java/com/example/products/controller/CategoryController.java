@@ -23,7 +23,7 @@ import java.util.Map;
 public class CategoryController {
 
     private static final Logger logger = LoggerFactory.getLogger( CategoryController.class );
-    private CategoryHandler categoryHandler;
+    private final CategoryHandler categoryHandler;
 
     @Autowired
     CategoryController( CategoryHandler categoryHandler ) {
