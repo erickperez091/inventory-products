@@ -59,7 +59,7 @@ public class ProductProcessor {
         InvoiceDTO invoiceDTO = this.converterUtil.mapToObject( payload, InvoiceDTO.class );
         InvoiceStatus invoiceStatus = InvoiceStatus.valueOf( invoiceDTO.getInvoiceStatus() );
         switch ( invoiceStatus ){
-            case APPROVED -> {
+            case APPROVED: {
                 invoiceDTO.getProducts().stream().forEach( productDTO ->{
                     Optional<Product> productOptional = productService.findById( productDTO.getId() );
                     if( productOptional.isPresent() ){
@@ -68,8 +68,9 @@ public class ProductProcessor {
                         productService.save( product );
                     }
                 });
+                break;
             }
-            case CANCELED -> {
+            case CANCELED: {
                 invoiceDTO.getProducts().stream().forEach( productDTO ->{
                     Optional<Product> productOptional = productService.findById( productDTO.getId() );
                     if( productOptional.isPresent() ){
@@ -78,6 +79,7 @@ public class ProductProcessor {
                         productService.save( product );
                     }
                 });
+                break;
             }
         }
         logger.info( "FINISH | Update Products Stock" );
