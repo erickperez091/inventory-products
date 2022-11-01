@@ -52,13 +52,11 @@ public class ProductService {
                 Product product = optionalProduct.get();
                 long amountProduct = Long.parseLong( map.get( "units" ).toString() );
                 switch ( invoiceStatus ) {
-                    case APPROVED: {
+                    case APPROVED -> {
                         product.setTotalStock( product.getTotalStock().subtract( BigInteger.valueOf( amountProduct ) ) );
-                        break;
                     }
-                    case CANCELED: {
+                    case CANCELED -> {
                         product.setTotalStock( product.getTotalStock().add( BigInteger.valueOf( amountProduct ) ) );
-                        break;
                     }
                 }
                 repository.save( product );

@@ -58,28 +58,26 @@ public class ProductProcessor {
         logger.info( "START | Update Products Stock" );
         InvoiceDTO invoiceDTO = this.converterUtil.mapToObject( payload, InvoiceDTO.class );
         InvoiceStatus invoiceStatus = InvoiceStatus.valueOf( invoiceDTO.getInvoiceStatus() );
-        switch ( invoiceStatus ){
-            case APPROVED: {
-                invoiceDTO.getProducts().stream().forEach( productDTO ->{
-                    Optional<Product> productOptional = productService.findById( productDTO.getId() );
-                    if( productOptional.isPresent() ){
+        switch ( invoiceStatus ) {
+            case APPROVED -> {
+                invoiceDTO.getProducts().forEach( productDTO -> {
+                    Optional< Product > productOptional = productService.findById( productDTO.getId() );
+                    if ( productOptional.isPresent() ) {
                         Product product = productOptional.get();
                         product.setTotalStock( product.getTotalStock().subtract( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
                     }
-                });
-                break;
+                } );
             }
-            case CANCELED: {
-                invoiceDTO.getProducts().stream().forEach( productDTO ->{
-                    Optional<Product> productOptional = productService.findById( productDTO.getId() );
-                    if( productOptional.isPresent() ){
+            case CANCELED -> {
+                invoiceDTO.getProducts().forEach( productDTO -> {
+                    Optional< Product > productOptional = productService.findById( productDTO.getId() );
+                    if ( productOptional.isPresent() ) {
                         Product product = productOptional.get();
                         product.setTotalStock( product.getTotalStock().add( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
                     }
-                });
-                break;
+                } );
             }
         }
         logger.info( "FINISH | Update Products Stock" );
