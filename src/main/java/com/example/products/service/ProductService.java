@@ -48,8 +48,7 @@ public class ProductService {
     public void updateProductStock( List< HashMap< String, Object > > productStock, InvoiceStatus invoiceStatus ) {
         productStock.forEach( map -> {
             Optional< Product > optionalProduct = repository.findProductById( map.get( "id" ).toString() );
-            if ( optionalProduct.isPresent() ) {
-                Product product = optionalProduct.get();
+            optionalProduct.ifPresentOrElse( product -> {
                 long amountProduct = Long.parseLong( map.get( "units" ).toString() );
                 switch ( invoiceStatus ) {
                     case APPROVED -> {
@@ -60,7 +59,9 @@ public class ProductService {
                     }
                 }
                 repository.save( product );
-            }
+            }, () -> {
+
+            } );
         } );
     }
 }

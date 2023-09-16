@@ -1,6 +1,5 @@
 package com.example.products.consumer.processor;
 
-import com.example.common.entitty.EnumUtil;
 import com.example.common.entitty.EnumUtil.InvoiceStatus;
 import com.example.common.utilities.ConverterUtil;
 import com.example.products.entity.Product;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -62,21 +59,21 @@ public class ProductProcessor {
             case APPROVED -> {
                 invoiceDTO.getProducts().forEach( productDTO -> {
                     Optional< Product > productOptional = productService.findById( productDTO.getId() );
-                    if ( productOptional.isPresent() ) {
-                        Product product = productOptional.get();
+                    productOptional.ifPresentOrElse( product -> {
                         product.setTotalStock( product.getTotalStock().subtract( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
-                    }
+                    }, () -> {
+                    } );
                 } );
             }
             case CANCELED -> {
                 invoiceDTO.getProducts().forEach( productDTO -> {
                     Optional< Product > productOptional = productService.findById( productDTO.getId() );
-                    if ( productOptional.isPresent() ) {
-                        Product product = productOptional.get();
+                    productOptional.ifPresentOrElse( product -> {
                         product.setTotalStock( product.getTotalStock().add( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
-                    }
+                    }, () -> {
+                    } );
                 } );
             }
         }
