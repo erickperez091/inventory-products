@@ -19,7 +19,7 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger( ProductService.class );
 
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     @Autowired
     ProductService( ProductRepository productRepository ) {
@@ -48,21 +48,20 @@ public class ProductService {
     public void updateProductStock( List< HashMap< String, Object > > productStock, InvoiceStatus invoiceStatus ) {
         productStock.forEach( map -> {
             Optional< Product > optionalProduct = repository.findProductById( map.get( "id" ).toString() );
-            if ( optionalProduct.isPresent() ) {
-                Product product = optionalProduct.get();
+            optionalProduct.ifPresentOrElse( product -> {
                 long amountProduct = Long.parseLong( map.get( "units" ).toString() );
                 switch ( invoiceStatus ) {
-                    case APPROVED: {
+                    case APPROVED -> {
                         product.setTotalStock( product.getTotalStock().subtract( BigInteger.valueOf( amountProduct ) ) );
-                        break;
                     }
-                    case CANCELED: {
+                    case CANCELED -> {
                         product.setTotalStock( product.getTotalStock().add( BigInteger.valueOf( amountProduct ) ) );
-                        break;
                     }
                 }
                 repository.save( product );
-            }
+            }, () -> {
+
+            } );
         } );
     }
 }

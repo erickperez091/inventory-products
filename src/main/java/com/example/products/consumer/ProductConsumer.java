@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class ProductConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger( ProductConsumer.class );
-    private ProductProcessor productProcessor;
-    private CategoryProcessor categoryProcessor;
+    private final ProductProcessor productProcessor;
+    private final CategoryProcessor categoryProcessor;
 
     @Autowired
     public ProductConsumer( ProductProcessor productProcessor, CategoryProcessor categoryProcessor ) {
@@ -29,29 +29,23 @@ public class ProductConsumer {
         logger.info( "Message received: {}", messageEvent.getEventName() );
         EventType eventType = messageEvent.getEventName();
         switch ( eventType ) {
-            case CREATE_PRODUCT: {
+            case CREATE_PRODUCT -> {
                 productProcessor.store( messageEvent.getPayload() );
-                break;
             }
-            case UPDATE_PRODUCT: {
+            case UPDATE_PRODUCT -> {
                 productProcessor.refresh( messageEvent.getPayload() );
-                break;
             }
-            case DELETE_PRODUCT: {
+            case DELETE_PRODUCT -> {
                 productProcessor.delete( messageEvent.getPayload() );
-                break;
             }
-            case UPDATE_PRODUCT_STOCK: {
+            case UPDATE_PRODUCT_STOCK -> {
                 productProcessor.updateProductsStock( messageEvent.getPayload() );
-                break;
             }
-            case CREATE_CATEGORY: {
+            case CREATE_CATEGORY -> {
                 categoryProcessor.store( messageEvent.getPayload() );
-                break;
             }
-            case DELETE_CATEGORY: {
+            case DELETE_CATEGORY -> {
                 categoryProcessor.delete( messageEvent.getPayload() );
-                break;
             }
         }
     }

@@ -14,8 +14,8 @@ import java.util.Map;
 public class CategoryProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger( CategoryProcessor.class );
-    private CategoryService categoryService;
-    private ConverterUtil converterUtil;
+    private final CategoryService categoryService;
+    private final ConverterUtil converterUtil;
 
     @Autowired
     public CategoryProcessor( CategoryService categoryService, ConverterUtil converterUtil ) {

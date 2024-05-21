@@ -16,7 +16,7 @@ import java.util.Optional;
 public class CategoryService {
 
     private static final Logger logger = LoggerFactory.getLogger( CategoryService.class );
-    private CategoryRepository repository;
+    private final CategoryRepository repository;
 
     @Autowired
     CategoryService( CategoryRepository categoryRepository ) {

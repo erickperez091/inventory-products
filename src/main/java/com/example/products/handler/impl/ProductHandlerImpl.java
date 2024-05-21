@@ -6,6 +6,7 @@ import com.example.common.entitty.MessageEvent;
 import com.example.common.utilities.ConverterUtil;
 import com.example.common.utilities.IdUtil;
 import com.example.products.entity.Product;
+import com.example.products.entity.dto.InvoiceDTO;
 import com.example.products.handler.ProductHandler;
 import com.example.products.producer.ProductProducer;
 import com.example.products.service.ProductService;
@@ -22,10 +23,10 @@ import java.util.Optional;
 @Component
 public class ProductHandlerImpl implements ProductHandler {
 
-    private ProductService productService;
-    private ProductProducer productProducer;
-    private ConverterUtil converterUtil;
-    private IdUtil idUtil;
+    private final ProductService productService;
+    private final ProductProducer productProducer;
+    private final ConverterUtil converterUtil;
+    private final IdUtil idUtil;
 
     @Autowired
     ProductHandlerImpl( ProductService productService, ProductProducer productProducer, ConverterUtil converterUtil, IdUtil idUtil ) {
@@ -81,9 +82,10 @@ public class ProductHandlerImpl implements ProductHandler {
     }
 
     @Override
-    public ResponseEntity< Object > updateProductsStock( Map< String, Object > products ) {
-        MessageEvent messageEvent = new MessageEvent( EventType.UPDATE_PRODUCT_STOCK, products );
+    public ResponseEntity< Object > updateProductsStock( InvoiceDTO invoiceDTO ) {
+        Map<String, Object> invoiceDTOMap = this.converterUtil.objectToMap( invoiceDTO );
+        MessageEvent messageEvent = new MessageEvent( EventType.UPDATE_PRODUCT_STOCK, invoiceDTOMap );
         productProducer.sendMessage( messageEvent );
-        return new ResponseEntity<>( HttpStatus.OK );
+        return new ResponseEntity<>( invoiceDTO, HttpStatus.OK );
     }
 }
