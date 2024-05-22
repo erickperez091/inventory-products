@@ -63,6 +63,7 @@ public class ProductProcessor {
                         product.setTotalStock( product.getTotalStock().subtract( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
                     }, () -> {
+                        logger.info( "Product {} not found", productDTO.getId() );
                     } );
                 } );
             }
@@ -73,6 +74,7 @@ public class ProductProcessor {
                         product.setTotalStock( product.getTotalStock().add( new BigInteger( String.valueOf( productDTO.getUnits() ) ) ) );
                         productService.save( product );
                     }, () -> {
+                        logger.info( "Product {} not found", productDTO.getId() );
                     } );
                 } );
             }
