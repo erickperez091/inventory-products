@@ -1,6 +1,6 @@
 package com.example.products.entity;
 
-import com.example.common.entitty.EnumUtil;
+import com.example.common.entity.EnumUtil;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;

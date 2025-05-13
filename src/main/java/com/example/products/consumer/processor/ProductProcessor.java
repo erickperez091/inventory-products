@@ -1,6 +1,6 @@
 package com.example.products.consumer.processor;
 
-import com.example.common.entitty.EnumUtil.InvoiceStatus;
+import com.example.common.entity.EnumUtil.InvoiceStatus;
 import com.example.common.utilities.ConverterUtil;
 import com.example.products.entity.Product;
 import com.example.products.entity.dto.InvoiceDTO;

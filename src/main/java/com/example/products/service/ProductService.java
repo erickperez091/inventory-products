@@ -1,6 +1,6 @@
 package com.example.products.service;
 
-import com.example.common.entitty.EnumUtil.InvoiceStatus;
+import com.example.common.entity.EnumUtil.InvoiceStatus;
 import com.example.products.entity.Product;
 import com.example.products.repository.ProductRepository;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package com.example.products.handler.impl;
 
-import com.example.common.entitty.EnumUtil;
-import com.example.common.entitty.MessageEvent;
+import com.example.common.entity.EnumUtil;
+import com.example.common.entity.MessageEvent;
 import com.example.common.utilities.ConverterUtil;
 import com.example.common.utilities.IdUtil;
 import com.example.products.entity.Category;

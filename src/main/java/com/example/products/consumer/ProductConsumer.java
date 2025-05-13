@@ -1,7 +1,7 @@
 package com.example.products.consumer;
 
-import com.example.common.entitty.EnumUtil.EventType;
-import com.example.common.entitty.MessageEvent;
+import com.example.common.entity.EnumUtil.EventType;
+import com.example.common.entity.MessageEvent;
 import com.example.products.consumer.processor.CategoryProcessor;
 import com.example.products.consumer.processor.ProductProcessor;
 import org.slf4j.Logger;

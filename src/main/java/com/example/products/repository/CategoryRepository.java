@@ -1,6 +1,7 @@
 package com.example.products.repository;
 
 import com.example.products.entity.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends CrudRepository< Category, String >, CustomRepository {
+public interface CategoryRepository extends JpaRepository< Category, String >, CustomRepository {
 
     @Modifying( clearAutomatically = true )
     @Query( "UPDATE Category c SET c.status = 'DELETED' WHERE c.id = :id AND " +
