@@ -1,6 +1,9 @@
 package com.example.products.entity;
 
 import com.example.common.entity.EnumUtil;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
@@ -24,6 +27,9 @@ import java.io.Serializable;
 @Filters( {
         @Filter( name = "categoryActive", condition = "status <> 'DELETED'" )
 } )
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category implements Serializable {
 
     @Id
@@ -36,39 +42,6 @@ public class Category implements Serializable {
     @Column( name = "status" )
     @Enumerated( EnumType.STRING )
     private EnumUtil.Status status = defaultStatus();
-
-    public Category( String id, String description, EnumUtil.Status status ) {
-        this.id = id;
-        this.description = description;
-        this.status = status;
-    }
-
-    public Category() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId( String id ) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description;
-    }
-
-    public EnumUtil.Status getStatus() {
-        return status;
-    }
-
-    public void setStatus( EnumUtil.Status status ) {
-        this.status = status;
-    }
 
     private EnumUtil.Status defaultStatus() {
         return EnumUtil.Status.ACTIVE;
