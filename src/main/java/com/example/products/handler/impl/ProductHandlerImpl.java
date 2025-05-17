@@ -10,7 +10,7 @@ import com.example.products.entity.dto.InvoiceDTO;
 import com.example.products.handler.ProductHandler;
 import com.example.products.producer.ProductProducer;
 import com.example.products.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -21,20 +21,13 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class ProductHandlerImpl implements ProductHandler {
 
     private final ProductService productService;
     private final ProductProducer productProducer;
     private final ConverterUtil converterUtil;
     private final IdUtil idUtil;
-
-    @Autowired
-    ProductHandlerImpl( ProductService productService, ProductProducer productProducer, ConverterUtil converterUtil, IdUtil idUtil ) {
-        this.productService = productService;
-        this.productProducer = productProducer;
-        this.converterUtil = converterUtil;
-        this.idUtil = idUtil;
-    }
 
     @Override
     public ResponseEntity< Object > createProduct( Product product ) {

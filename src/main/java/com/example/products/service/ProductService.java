@@ -3,9 +3,9 @@ package com.example.products.service;
 import com.example.common.entity.EnumUtil.InvoiceStatus;
 import com.example.products.entity.Product;
 import com.example.products.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,16 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger( ProductService.class );
 
     private final ProductRepository repository;
-
-    @Autowired
-    ProductService( ProductRepository productRepository ) {
-        this.repository = productRepository;
-    }
 
     @Transactional
     public void save( Product product ) {
@@ -35,6 +31,13 @@ public class ProductService {
 
     @Transactional( readOnly = true )
     public Optional< Product > findById( String id ) {
+        /*
+                Optional< Product > result = repository.findProductById( id );
+        return result.map( product ->
+                new ProductDTO( product.getId(), product.getDescription(), product.getPrice(), product.getTotalStock(),
+                        product.getMinStock(), product.getBarcode(), product.getStatus().name(), product.getCategory().getId(), product.getDiscount()) )
+                .orElseThrow(() -> new RuntimeException( "Product not found" ) );
+        * */
         return repository.findProductById( id );
     }
 

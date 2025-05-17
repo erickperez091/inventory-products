@@ -3,12 +3,12 @@ package com.example.products.repository.impl;
 import com.example.products.entity.Category;
 import com.example.products.entity.Product;
 import com.example.products.repository.CustomRepository;
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

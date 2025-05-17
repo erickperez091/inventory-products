@@ -4,25 +4,20 @@ import com.example.common.entity.EnumUtil.EventType;
 import com.example.common.entity.MessageEvent;
 import com.example.products.consumer.processor.CategoryProcessor;
 import com.example.products.consumer.processor.ProductProcessor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ProductConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger( ProductConsumer.class );
     private final ProductProcessor productProcessor;
     private final CategoryProcessor categoryProcessor;
-
-    @Autowired
-    public ProductConsumer( ProductProcessor productProcessor, CategoryProcessor categoryProcessor ) {
-        this.productProcessor = productProcessor;
-        this.categoryProcessor = categoryProcessor;
-    }
 
     @KafkaListener( topics = { "${topic-name}" } )
     public void handleProductEvent( @Payload final MessageEvent messageEvent ) {

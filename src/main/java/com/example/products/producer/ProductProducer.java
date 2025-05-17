@@ -2,18 +2,14 @@ package com.example.products.producer;
 
 import com.example.common.entity.MessageEvent;
 import com.example.common.service.KafkaSenderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ProductProducer {
 
     private final KafkaSenderService senderService;
-
-    @Autowired
-    ProductProducer( KafkaSenderService senderService ) {
-        this.senderService = senderService;
-    }
 
     public void sendMessage( MessageEvent messageEvent ) {
         senderService.sendMessage( messageEvent );

@@ -3,25 +3,20 @@ package com.example.products.consumer.processor;
 import com.example.common.utilities.ConverterUtil;
 import com.example.products.entity.Category;
 import com.example.products.service.CategoryService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class CategoryProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger( CategoryProcessor.class );
     private final CategoryService categoryService;
     private final ConverterUtil converterUtil;
-
-    @Autowired
-    public CategoryProcessor( CategoryService categoryService, ConverterUtil converterUtil ) {
-        this.categoryService = categoryService;
-        this.converterUtil = converterUtil;
-    }
 
     public void store( Map< String, Object > payload ) {
         logger.info( "START | Create Category {}", payload );

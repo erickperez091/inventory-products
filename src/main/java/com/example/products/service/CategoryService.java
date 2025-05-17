@@ -3,9 +3,9 @@ package com.example.products.service;
 import com.example.products.entity.Category;
 import com.example.products.entity.Product;
 import com.example.products.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,15 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
     private static final Logger logger = LoggerFactory.getLogger( CategoryService.class );
     private final CategoryRepository repository;
-
-    @Autowired
-    CategoryService( CategoryRepository categoryRepository ) {
-        this.repository = categoryRepository;
-    }
 
     @Transactional
     public void save( Category category ) {

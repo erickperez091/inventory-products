@@ -9,8 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductToUpdateDTO {
+public class CategoryDTO {
+
     private String id;
     private String description;
-    private int units;
+    private String status;
+
 }
