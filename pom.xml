@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>24</java.version>
+        <java.version>21</java.version>
         <commons.lib.version>1.0.1</commons.lib.version>
         <swagger.version>3.0.0</swagger.version>
         <spring.cloud.dependency.version>2024.0.1</spring.cloud.dependency.version>
