@@ -1,0 +1,35 @@
+<settings>
+  <servers>
+    <server>
+      <id>internal-nexus</id>
+      <username>jenkins</username>
+      <password>jenkins</password>
+    </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+      <id>internal-nexus</id>
+      <mirrorOf>internal-nexus</mirrorOf>
+      <url>http://host.docker.internal:8084/repository/maven-test-releases/</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <repositories>
+        <repository>
+          <id>internal-nexus</id>
+          <url>http://host.docker.internal:8084/repository/maven-test-releases/</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+</settings>
