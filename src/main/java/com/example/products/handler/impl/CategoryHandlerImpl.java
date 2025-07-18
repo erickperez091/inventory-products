@@ -82,7 +82,6 @@ public class CategoryHandlerImpl implements CategoryHandler {
             products.forEach( product -> {
                 ProductDTO productDTO = this.converterUtil.transformObject( product, new TypeReference< ProductDTO >() {
                 } );
-                productDTO.setCategoryId( product.getCategory().getId() );
                 productsDTOList.get().add( productDTO );
             } );
         }, () -> {

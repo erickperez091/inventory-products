@@ -23,7 +23,7 @@ public class ProductDTO {
     private BigInteger minStock;
     private String barcode;
     private String status;
-    private String categoryId;
+    private CategoryDTO category;
     private BigDecimal discount;
 
 }
