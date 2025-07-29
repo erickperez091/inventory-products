@@ -6,8 +6,7 @@ import com.example.products.entity.Product;
 import com.example.products.entity.dto.InvoiceDTO;
 import com.example.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -16,9 +15,9 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class ProductProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger( ProductProcessor.class );
 
     private final ProductService productService;
     private final ConverterUtil converterUtil;

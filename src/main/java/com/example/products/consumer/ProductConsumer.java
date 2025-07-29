@@ -5,17 +5,16 @@ import com.example.common.entity.MessageEvent;
 import com.example.products.consumer.processor.CategoryProcessor;
 import com.example.products.consumer.processor.ProductProcessor;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class ProductConsumer {
 
-    private static final Logger logger = LoggerFactory.getLogger( ProductConsumer.class );
     private final ProductProcessor productProcessor;
     private final CategoryProcessor categoryProcessor;
 

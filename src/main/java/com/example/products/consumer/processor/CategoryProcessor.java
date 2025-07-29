@@ -4,17 +4,16 @@ import com.example.common.utilities.ConverterUtil;
 import com.example.products.entity.Category;
 import com.example.products.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class CategoryProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger( CategoryProcessor.class );
     private final CategoryService categoryService;
     private final ConverterUtil converterUtil;
 

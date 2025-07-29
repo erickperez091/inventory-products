@@ -13,6 +13,7 @@ import com.example.products.producer.ProductProducer;
 import com.example.products.service.CategoryService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class CategoryHandlerImpl implements CategoryHandler {
 
     private final ProductProducer productProducer;

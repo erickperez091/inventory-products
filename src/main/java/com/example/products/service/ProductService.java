@@ -4,8 +4,7 @@ import com.example.common.entity.EnumUtil.InvoiceStatus;
 import com.example.products.entity.Product;
 import com.example.products.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +15,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ProductService {
-
-    private static final Logger logger = LoggerFactory.getLogger( ProductService.class );
-
     private final ProductRepository repository;
 
     @Transactional

@@ -4,8 +4,7 @@ import com.example.products.entity.Category;
 import com.example.products.entity.Product;
 import com.example.products.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +13,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class CategoryService {
 
-    private static final Logger logger = LoggerFactory.getLogger( CategoryService.class );
     private final CategoryRepository repository;
 
     @Transactional
