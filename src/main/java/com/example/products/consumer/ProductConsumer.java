@@ -2,24 +2,23 @@ package com.example.products.consumer;
 
 import com.example.common.entity.EnumUtil.EventType;
 import com.example.common.entity.MessageEvent;
+import com.example.common.service.messaging.MessagingCosumer;
 import com.example.products.consumer.processor.CategoryProcessor;
 import com.example.products.consumer.processor.ProductProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class ProductConsumer {
+public class ProductConsumer implements MessagingCosumer {
 
     private final ProductProcessor productProcessor;
     private final CategoryProcessor categoryProcessor;
 
-    @KafkaListener(topics = {"${topic-name}"})
-    public void handleProductEvent(@Payload final MessageEvent messageEvent) {
+    @Override
+    public void consume(MessageEvent messageEvent) {
         logger.info("Message received: {}", messageEvent.getEventName());
         EventType eventType = messageEvent.getEventName();
         switch (eventType) {
