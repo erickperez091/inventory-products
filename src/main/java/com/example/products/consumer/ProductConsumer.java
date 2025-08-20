@@ -18,29 +18,17 @@ public class ProductConsumer {
     private final ProductProcessor productProcessor;
     private final CategoryProcessor categoryProcessor;
 
-    @KafkaListener( topics = { "${topic-name}" } )
-    public void handleProductEvent( @Payload final MessageEvent messageEvent ) {
-        logger.info( "Message received: {}", messageEvent.getEventName() );
+    @KafkaListener(topics = {"${topic-name}"})
+    public void handleProductEvent(@Payload final MessageEvent messageEvent) {
+        logger.info("Message received: {}", messageEvent.getEventName());
         EventType eventType = messageEvent.getEventName();
-        switch ( eventType ) {
-            case CREATE_PRODUCT -> {
-                productProcessor.store( messageEvent.getPayload() );
-            }
-            case UPDATE_PRODUCT -> {
-                productProcessor.refresh( messageEvent.getPayload() );
-            }
-            case DELETE_PRODUCT -> {
-                productProcessor.delete( messageEvent.getPayload() );
-            }
-            case UPDATE_PRODUCT_STOCK -> {
-                productProcessor.updateProductsStock( messageEvent.getPayload() );
-            }
-            case CREATE_CATEGORY -> {
-                categoryProcessor.store( messageEvent.getPayload() );
-            }
-            case DELETE_CATEGORY -> {
-                categoryProcessor.delete( messageEvent.getPayload() );
-            }
+        switch (eventType) {
+            case CREATE_PRODUCT -> this.productProcessor.store(messageEvent.getPayload());
+            case UPDATE_PRODUCT -> this.productProcessor.refresh(messageEvent.getPayload());
+            case DELETE_PRODUCT -> this.productProcessor.delete(messageEvent.getPayload());
+            case UPDATE_PRODUCT_STOCK -> this.productProcessor.updateProductsStock(messageEvent.getPayload());
+            case CREATE_CATEGORY -> this.categoryProcessor.store(messageEvent.getPayload());
+            case DELETE_CATEGORY -> this.categoryProcessor.delete(messageEvent.getPayload());
         }
     }
 }

@@ -41,7 +41,7 @@ kafka:
     client-id: products
   max:
     poll:
-      records: 1
+
 logging:
   level:
     org:

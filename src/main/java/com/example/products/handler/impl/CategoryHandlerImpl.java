@@ -3,13 +3,13 @@ package com.example.products.handler.impl;
 import com.example.common.entity.EnumUtil;
 import com.example.common.entity.MessageEvent;
 import com.example.common.utilities.ConverterUtil;
-import com.example.common.utilities.IdUtil;
+import com.example.common.utilities.IdGeneratorService;
 import com.example.products.entity.Category;
 import com.example.products.entity.Product;
 import com.example.products.entity.dto.CategoryDTO;
 import com.example.products.entity.dto.ProductDTO;
 import com.example.products.handler.CategoryHandler;
-import com.example.products.producer.ProductProducer;
+import com.example.products.messaging.ProductPublisher;
 import com.example.products.service.CategoryService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
@@ -31,17 +31,17 @@ import java.util.concurrent.atomic.AtomicReference;
 @Log4j2
 public class CategoryHandlerImpl implements CategoryHandler {
 
-    private final ProductProducer productProducer;
+    private final ProductPublisher productPublisher;
     private final CategoryService categoryService;
     private final ConverterUtil converterUtil;
-    private final IdUtil idUtil;
+    private final IdGeneratorService idGeneratorService;
 
     @Override
     public ResponseEntity< Object > createCategory( Category category ) {
-        category.setId( this.idUtil.generateId( EnumUtil.UUIDType.SHORT ) );
+        category.setId( this.idGeneratorService.generateId( EnumUtil.UUIDType.SHORT ) );
         Map< String, Object > categoryPayload = this.converterUtil.objectToMap( category );
         MessageEvent messageEvent = new MessageEvent( EnumUtil.EventType.CREATE_CATEGORY, categoryPayload );
-        this.productProducer.sendMessage( messageEvent );
+        this.productPublisher.sendEvent( messageEvent );
         return new ResponseEntity<>( category.getId(), HttpStatus.OK );
     }
 
@@ -69,7 +69,7 @@ public class CategoryHandlerImpl implements CategoryHandler {
         Map< String, Object > payload = new HashMap<>();
         payload.put( "id", id );
         MessageEvent messageEvent = new MessageEvent( EnumUtil.EventType.DELETE_CATEGORY, payload );
-        productProducer.sendMessage( messageEvent );
+        this.productPublisher.sendEvent( messageEvent );
         return new ResponseEntity<>( payload, HttpStatus.OK );
     }
 
