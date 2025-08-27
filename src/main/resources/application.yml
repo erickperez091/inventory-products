@@ -1,5 +1,6 @@
 server:
   port: 9080
+
 spring:
   application:
     name: inventory-service
@@ -20,6 +21,11 @@ spring:
       matching-strategy: ant_path_matcher
   kafka:
     bootstrap-servers: ${KAFKA_HOST:localhost:9092}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${SERVER_DISCOVERY:http://localhost:8761/eureka}
 
 messaging:
   provider: ${MESSAGING_PROVIDER:kafka}
@@ -42,15 +48,6 @@ security:
   public:
     url:
 
-eureka:
-  client:
-    service-url:
-      defaultZone: ${SERVER_DISCOVERY:http://localhost:8761/eureka}
-kafka:
-  consumer:
-    client-id: products
-  max:
-    poll:
 
 logging:
   level:
@@ -61,4 +58,3 @@ logging:
           descriptor:
             sql:
               BasicBinder: info
-topic-name: products
