@@ -92,4 +92,10 @@ public class CategoryHandlerImpl implements CategoryHandler {
 
         return new ResponseEntity<>( productsDTOList, HttpStatus.OK );
     }
+
+    @Override
+    public ResponseEntity<Object> getAllCategories() {
+        List<CategoryDTO> categories = categoryService.findAll().stream().map(category -> new CategoryDTO(category.getId(), category.getDescription(), category.getStatus().name())).toList();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
 }

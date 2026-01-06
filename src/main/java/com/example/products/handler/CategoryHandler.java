@@ -16,4 +16,6 @@ public interface CategoryHandler {
     ResponseEntity< Object > deleteCategory( String id );
 
     ResponseEntity< Object > getProductsByCategory( String categoryId );
+
+    ResponseEntity<Object> getAllCategories( );
 }

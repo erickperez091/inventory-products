@@ -56,4 +56,10 @@ public class CategoryController {
     public ResponseEntity< Object > getProductsByCategory( @PathVariable( name = "id" ) String id ) {
         return categoryHandler.getProductsByCategory( id );
     }
+
+    @GetMapping( name = "get all categories", path = "/", value = "/", produces = { MediaType.APPLICATION_JSON_VALUE } )
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity< Object > getAllCategories( ) {
+        return categoryHandler.getAllCategories();
+    }
 }

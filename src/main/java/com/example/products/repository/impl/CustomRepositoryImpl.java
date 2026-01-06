@@ -48,7 +48,14 @@ public class CustomRepositoryImpl implements CustomRepository {
         return Optional.of( result );
     }
 
-    private void enableFilter( String filterName ) {
+    public Optional<List<Category>> findAll() {
+        Query query = entityManager.createQuery( "SELECT c FROM Category c", Category.class );
+        enableFilter( "categoryActive" );
+        List<Category> result = (List<Category>) query.getResultList();
+        return Optional.of( result );
+    }
+
+    private void enableFilter(String filterName ) {
         if ( Objects.nonNull( entityManager ) ) {
             Session session = entityManager.unwrap( Session.class );
             session.enableFilter( filterName );
