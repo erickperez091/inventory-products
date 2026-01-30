@@ -29,6 +29,8 @@ eureka:
 
 messaging:
   provider: ${MESSAGING_PROVIDER:kafka}
+  destination:
+    products: products
   kafka:
     client-id: ${KAFKA_CLIENT_ID:inventory-service}
     topic: ${KAFKA_TOPIC:products}
