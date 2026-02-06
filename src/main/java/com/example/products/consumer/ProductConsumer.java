@@ -2,20 +2,29 @@ package com.example.products.consumer;
 
 import com.example.common.entity.EnumUtil.EventType;
 import com.example.common.entity.MessageEvent;
-import com.example.common.service.messaging.MessagingCosumer;
+import com.example.common.service.messaging.MessagingConsumer;
 import com.example.products.consumer.processor.CategoryProcessor;
 import com.example.products.consumer.processor.ProductProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class ProductConsumer implements MessagingCosumer {
+public class ProductConsumer implements MessagingConsumer {
+
+    @Value("${messaging.destination.products}")
+    private String destination;
 
     private final ProductProcessor productProcessor;
     private final CategoryProcessor categoryProcessor;
+
+    @Override
+    public String destination() {
+        return destination;
+    }
 
     @Override
     public void consume(MessageEvent messageEvent) {
