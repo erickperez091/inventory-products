@@ -67,7 +67,7 @@ pipeline {
             steps {
                 sh '''
                     docker build \
-                      --build-arg JAR_FILE=target/user-service-${PROJECT_VERSION}.jar \
+                      --build-arg JAR_FILE=target/products-${PROJECT_VERSION}.jar \
                       -t ${DOCKER_IMAGE}:${PROJECT_VERSION} \
                       -t ${DOCKER_IMAGE}:latest \
                       .
