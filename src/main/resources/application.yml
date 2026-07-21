@@ -49,6 +49,8 @@ security:
   jwt:
     secret: ${JWT_SECRET:}
     expiration: ${JWT_EXPIRATION:900000}
+  public:
+    url:
 
 logging:
   level:
