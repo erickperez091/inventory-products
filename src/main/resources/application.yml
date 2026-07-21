@@ -21,6 +21,12 @@ spring:
       matching-strategy: ant_path_matcher
   kafka:
     bootstrap-servers: ${KAFKA_HOST:localhost:9092}
+  data:
+    redis:
+      port: ${REDIS_PORT:6379}
+      host: ${REDIS_HOST:localhost}
+  pulsar:
+    service-url: ${PULSAR_HOST:pulsar://localhost:6650}
 
 eureka:
   client:
@@ -51,6 +57,16 @@ security:
     expiration: ${JWT_EXPIRATION:900000}
   public:
     url:
+
+cache:
+  enabled: ${CACHE_ENABLED:true}
+  provider: ${CACHE_PROVIDER:redis}
+  memcached:
+    host: ${MEMCACHED_HOST:localhost}
+    port: ${MEMCACHED_PORT:11211}
+
+common:
+  id-generator: ${ID_GENERATOR:ulid_id}
 
 logging:
   level:
