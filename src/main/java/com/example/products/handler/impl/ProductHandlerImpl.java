@@ -7,6 +7,7 @@ import com.example.common.utilities.ConverterUtil;
 import com.example.common.utilities.IdGeneratorService;
 import com.example.products.entity.Product;
 import com.example.products.entity.dto.InvoiceDTO;
+import com.example.products.entity.dto.ProductDTO;
 import com.example.products.handler.ProductHandler;
 import com.example.products.messaging.ProductPublisher;
 import com.example.products.service.ProductService;
@@ -32,7 +33,7 @@ public class ProductHandlerImpl implements ProductHandler {
     private final IdGeneratorService idGeneratorService;
 
     @Override
-    public ResponseEntity<Object> createProduct(Product product) {
+    public ResponseEntity<Object> createProduct(ProductDTO product) {
         product.setId(this.idGeneratorService.generateId(UUIDType.SHORT));
         Map<String, Object> productPayload = converterUtil.objectToMap(product);
         MessageEvent messageEvent = new MessageEvent(EventType.CREATE_PRODUCT, productPayload);

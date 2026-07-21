@@ -1,5 +1,6 @@
 package com.example.products.messaging;
 
+import com.example.common.aspect.AddCreatedBy;
 import com.example.common.entity.MessageEvent;
 import com.example.common.service.messaging.MessagingProducer;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class ProductPublisher {
 
     private final MessagingProducer messagingProducer;
 
+    @AddCreatedBy(addCreatedAt = true)
     public void sendEvent(MessageEvent messageEvent) {
         messagingProducer.send(destination, messageEvent);
     }

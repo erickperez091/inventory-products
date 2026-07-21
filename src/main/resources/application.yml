@@ -41,15 +41,14 @@ messaging:
     region: ${KINESIS_REGION:us-east-1}
     endpoint-override: ${ENDPOINT_OVERRIDE:http://localhost:4566}
     async-native: ${KINESIS_ASYNC:false}
+  pulsar:
+    subscription-name: ${PULSAR_SUBSCRIPTION_NAME:inventory-service}
 
 security:
   enabled: ${SECURITY_ENABLED:false}
   jwt:
-    secret: ${JWT_SECRET}
-    expiration: 300000
-  public:
-    url:
-
+    secret: ${JWT_SECRET:}
+    expiration: ${JWT_EXPIRATION:900000}
 
 logging:
   level:

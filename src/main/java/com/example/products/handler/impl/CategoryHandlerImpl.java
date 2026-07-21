@@ -37,12 +37,13 @@ public class CategoryHandlerImpl implements CategoryHandler {
     private final IdGeneratorService idGeneratorService;
 
     @Override
-    public ResponseEntity< Object > createCategory( Category category ) {
+    public ResponseEntity< Object > createCategory( CategoryDTO category ) {
         category.setId( this.idGeneratorService.generateId( EnumUtil.UUIDType.SHORT ) );
         Map< String, Object > categoryPayload = this.converterUtil.objectToMap( category );
         MessageEvent messageEvent = new MessageEvent( EnumUtil.EventType.CREATE_CATEGORY, categoryPayload );
         this.productPublisher.sendEvent( messageEvent );
-        return new ResponseEntity<>( category.getId(), HttpStatus.OK );
+        var responseEntity = new com.example.common.entity.ResponseEntity<>(HttpStatus.OK, category );
+        return new ResponseEntity<>( responseEntity, HttpStatus.OK );
     }
 
     @Override

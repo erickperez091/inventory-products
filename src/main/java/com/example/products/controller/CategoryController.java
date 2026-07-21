@@ -1,6 +1,6 @@
 package com.example.products.controller;
 
-import com.example.products.entity.Category;
+import com.example.products.entity.dto.CategoryDTO;
 import com.example.products.handler.CategoryHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +28,7 @@ public class CategoryController {
 
     @PostMapping( name = "create", value = "/", path = "/", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE } )
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity< Object > create( @RequestBody Category category ) {
+    public ResponseEntity< Object > create( @RequestBody CategoryDTO category ) {
         logger.info( "HomeController - Start sending message." );
         return categoryHandler.createCategory( category );
     }

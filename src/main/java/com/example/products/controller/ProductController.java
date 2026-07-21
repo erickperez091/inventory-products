@@ -2,6 +2,7 @@ package com.example.products.controller;
 
 import com.example.products.entity.Product;
 import com.example.products.entity.dto.InvoiceDTO;
+import com.example.products.entity.dto.ProductDTO;
 import com.example.products.handler.ProductHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,7 +36,7 @@ public class ProductController {
     @PostMapping( name = "create", value = "/", path = "/", consumes = { MediaType.APPLICATION_JSON_VALUE },
             produces = { MediaType.APPLICATION_JSON_VALUE } )
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity< Object > create( @RequestBody Product product ) {
+    public ResponseEntity< Object > create( @RequestBody ProductDTO product ) {
         logger.info( "HomeController - Start sending message." );
         return productHandler.createProduct( product );
     }

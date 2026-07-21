@@ -1,6 +1,11 @@
 package com.example.products.entity;
 
 import com.example.common.entity.EnumUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,8 +21,12 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 @DynamicUpdate
 @Table( name = "category" )
@@ -46,4 +55,15 @@ public class Category implements Serializable {
     private EnumUtil.Status defaultStatus() {
         return EnumUtil.Status.ACTIVE;
     }
+
+    @Column(name = "createdBy", updatable = false)
+    private String createdBy;
+
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss", iso = DATE_TIME )
+    @JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss" )
+    @Column( name = "createdAt", columnDefinition = "TIMESTAMP" )
+    @JsonDeserialize( using = LocalDateTimeDeserializer.class )
+    @JsonSerialize( using = LocalDateTimeSerializer.class )
+    private LocalDateTime createdAt;
 }
+
