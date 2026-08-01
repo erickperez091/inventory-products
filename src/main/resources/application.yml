@@ -77,3 +77,21 @@ logging:
           descriptor:
             sql:
               BasicBinder: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
