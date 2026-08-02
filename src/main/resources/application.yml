@@ -56,7 +56,7 @@ security:
     secret: ${JWT_SECRET:}
     expiration: ${JWT_EXPIRATION:900000}
   public:
-    url:
+    url: "${SECURITY_PUBLIC_URL:}"
 
 cache:
   enabled: ${CACHE_ENABLED:true}

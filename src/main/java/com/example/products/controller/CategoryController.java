@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping( "/category/v1" )
+@RequestMapping( "/category" )
 @RequiredArgsConstructor
 @Log4j2
 public class CategoryController {

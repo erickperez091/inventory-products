@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping( "/product/v1" )
+@RequestMapping( "/product" )
 @RequiredArgsConstructor
 @Log4j2
 public class ProductController {
